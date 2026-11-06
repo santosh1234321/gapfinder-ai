@@ -112,7 +112,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Action Cards */}
-        <div className="mb-10 grid grid-cols-1 gap-5 sm:grid-cols-3">
+        <div className="mb-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           <Link
             href="/upload"
             className="group relative rounded-2xl border border-zinc-200 bg-white p-6 shadow-xs transition hover:border-indigo-400 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-indigo-600"
@@ -130,6 +130,26 @@ export default function DashboardPage() {
             </p>
             <span className="mt-4 inline-flex items-center text-xs font-semibold text-indigo-600 dark:text-indigo-400 group-hover:underline">
               Go to Upload →
+            </span>
+          </Link>
+
+          <Link
+            href="/topics"
+            className="group relative rounded-2xl border border-zinc-200 bg-white p-6 shadow-xs transition hover:border-indigo-400 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-indigo-600"
+          >
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 dark:bg-emerald-950/50 dark:text-emerald-400 mb-4 group-hover:scale-105 transition-transform">
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+            </div>
+            <h2 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+              Interactive Topic Map
+            </h2>
+            <p className="mt-1.5 text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+              Explore your course hierarchy across subjects, modules, units, and subtopics with search.
+            </p>
+            <span className="mt-4 inline-flex items-center text-xs font-semibold text-emerald-600 dark:text-emerald-400 group-hover:underline">
+              View Topic Map →
             </span>
           </Link>
 
@@ -233,6 +253,12 @@ export default function DashboardPage() {
                     </div>
 
                     <div className="flex items-center gap-2">
+                      <Link
+                        href="/topics"
+                        className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-3 py-1.5 text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition"
+                      >
+                        Topic Map
+                      </Link>
                       <Link
                         href="/chat"
                         className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-3 py-1.5 text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition"

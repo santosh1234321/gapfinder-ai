@@ -104,6 +104,32 @@ flowchart TD
 
 ---
 
+### 6.1 Retrieval-Augmented Generation (RAG) Architecture
+
+GapFinder AI follows a Retrieval-Augmented Generation (RAG) approach that separates information retrieval from response generation. This ensures that AI-generated answers and diagnostic questions are grounded in the student's uploaded academic materials.
+
+**1. Retrieval Stage**
+- Uploaded PDF content is divided into sentence-aware, overlapping text chunks.
+- Google Gemini (`gemini-embedding-001`) converts these chunks into 768-dimensional vector embeddings.
+- The embeddings are stored in Supabase PostgreSQL using the pgvector extension.
+- When a student submits a question, the query is converted into an embedding using the same Gemini embedding model.
+- The `match_document_chunks` PostgreSQL function performs cosine-similarity-based vector search to retrieve relevant chunks from the selected document.
+
+**2. Generation Stage**
+- The retrieved document chunks are passed as contextual input to the Groq-hosted LLM (`openai/gpt-oss-120b`).
+- The LLM uses this context to generate relevant, natural-language responses.
+- The AI Study Assistant provides answers supported by source citations and document excerpts.
+- The diagnostic quiz engine uses retrieved academic content to generate document-grounded assessment questions and explanations.
+
+**3. Separation of Retrieval and Generation**
+
+Retrieval and generation perform two distinct responsibilities:
+
+- **Retrieval** identifies and fetches relevant information from the student's uploaded documents using semantic similarity.
+- **Generation** interprets the retrieved information and produces answers or assessment questions using the LLM.
+
+The LLM does not perform vector retrieval itself. Instead, the application retrieves relevant document chunks first and supplies them as context during generation. This separation improves source traceability and reduces dependence on generic, unsupported model responses.
+
 ## 7. Application Workflow
 
 1. **Sign Up / Login:** The user registers or signs in via Supabase Authentication.
@@ -145,6 +171,7 @@ gapfinder-ai/
 │   ├── login/page.tsx                # User login page
 │   ├── quiz/page.tsx                 # Diagnostic quiz, scoring & gap analysis UI
 │   ├── register/page.tsx             # New user registration page
+│   ├── topics/page.tsx               # Interactive syllabus Topic Map
 │   ├── upload/page.tsx               # Stepped PDF upload & indexing pipeline
 │   ├── globals.css                   # Global styles & Tailwind CSS v4 theme
 │   ├── layout.tsx                    # Root layout with system font stack
@@ -299,6 +326,7 @@ npm run start
 | **AI Study Assistant** (`/chat`) | Grounded RAG chat with document picker and collapsible source citations. |
 | **Diagnostic Assessment** (`/quiz`) | 5-question multiple choice quiz with instant option selection. |
 | **Gap Analysis & Revision** (`/quiz`) | Score breakdown, Demonstrated vs. Weak Areas, and targeted action plan. |
+| **Topic Map** (`/topics`) | Interactive syllabus hierarchy with subjects, units, topics, subtopics, and search. |
 
 ---
 

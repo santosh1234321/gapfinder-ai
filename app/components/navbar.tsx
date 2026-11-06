@@ -30,6 +30,7 @@ export default function Navbar() {
   const navLinks = [
     { href: "/dashboard", label: "Dashboard" },
     { href: "/upload", label: "Study Materials" },
+    { href: "/topics", label: "Topic Map" },
     { href: "/chat", label: "AI Assistant" },
     { href: "/quiz", label: "Diagnostic Quiz" },
   ];

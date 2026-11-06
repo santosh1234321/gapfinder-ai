@@ -35,11 +35,16 @@ export default function DashboardPage() {
   }
 
   return (
-    <main>
-      <h1>Welcome to GapFinder AI!</h1>
-      <p>You are successfully logged in.</p>
-      <p>Email: {email}</p>
-      <LogoutButton />
-    </main>
-  );
+  <main>
+    <h1>Welcome to GapFinder AI!</h1>
+    <p>You are successfully logged in.</p>
+    <p>Email: {email}</p>
+
+    <button onClick={() => router.push("/upload")}>
+      Upload Study Material
+    </button>
+
+    <LogoutButton />
+  </main>
+);
 }

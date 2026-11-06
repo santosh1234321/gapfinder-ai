@@ -166,10 +166,17 @@ export async function POST(request: Request) {
       });
     }
 
+    // Constrain context size to prevent exceeding Groq TPM rate limits
     const topicContext = availableTopics
+      .slice(0, count)
       .map((topic) => {
         const sources = (sourceMap[topic.topicId] || [documentChunks[0]])
-          .map((source: any) => source.content)
+          .map((source: any) =>
+            typeof source?.content === "string"
+              ? source.content.slice(0, 500)
+              : ""
+          )
+          .filter(Boolean)
           .join("\n\n");
 
         return `
@@ -231,14 +238,14 @@ Return valid JSON in this structure:
         ],
       });
     } catch (groqErr) {
-      console.warn("Primary model error, falling back to llama-3.3-70b-versatile:", groqErr);
+      console.warn("Groq question generation error, retrying with openai/gpt-oss-120b and trimmed context:", groqErr);
       completion = await groq.chat.completions.create({
-        model: "llama-3.3-70b-versatile",
+        model: "openai/gpt-oss-120b",
         temperature: 0.2,
         response_format: { type: "json_object" },
         messages: [
           { role: "system", content: systemPrompt },
-          { role: "user", content: topicContext },
+          { role: "user", content: topicContext.slice(0, 3000) },
         ],
       });
     }

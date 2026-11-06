@@ -53,7 +53,7 @@ GapFinder AI solves this by introducing a closed-loop academic diagnostic workfl
 - **Styling:** Tailwind CSS v4
 - **Database & Storage:** Supabase PostgreSQL with `pgvector` extension and Supabase Storage
 - **Authentication:** Supabase Auth (`@supabase/ssr`, `@supabase/supabase-js`)
-- **LLM Reasoning & Generation:** Groq SDK (`openai/gpt-oss-120b` with automatic fallback to `llama-3.3-70b-versatile`)
+- **LLM Reasoning & Generation:** Groq SDK (`openai/gpt-oss-120b`)
 - **Vector Embeddings:** Google Gemini API (`gemini-embedding-001`, 768-dimensional embeddings)
 - **Document Text Extraction:** `pdfjs-dist` (legacy build with headless worker support)
 - **Hosting & CI/CD:** Vercel & GitHub
